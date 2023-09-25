@@ -328,7 +328,7 @@ def calculate_sparsity(model):
 
 """ fitness is the metric of individual and it is calculated from the accurancy and loss of the model
 plus the % of sparsity (the 0 values in a model's weights) """
-def calculate_fitness(model,accuracy, average_loss, alpha = 0.1 , beta = 0.95, gama = 0.05):
+def calculate_fitness(model,accuracy, average_loss, alpha  , beta , gama ):
   #accuracy, average_loss = evaluation_2(model, criterion)
   average_sparsity = calculate_sparsity(model)
   fitness = (alpha * accuracy) + (beta * average_sparsity) + (gama / average_loss)
@@ -339,11 +339,11 @@ def calculate_fitness(model,accuracy, average_loss, alpha = 0.1 , beta = 0.95, g
 """ ## Select parents """
 
 """ the individual with the hieghest fitness will be selected for the Croisement """
-def sort_population (population, alpha = 0.1 , beta = 0.95, gama = 0.05) :
+def sort_population (population, alpha, beta , gama ) :
   population.sort(key=lambda indiv : calculate_fitness(indiv,indiv.best_acc,indiv.best_loss,alpha,beta,gama), reverse=True)
   return None
 
-def select_parents_elits(population,alpha = 0.1 , beta = 0.95, gama = 0.05) :
+def select_parents_elits(population,alpha, beta, gama) :
   sort_population(population,alpha,beta,gama)
   elits = []
   NC = []
